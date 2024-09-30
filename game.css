@@ -1,0 +1,70 @@
+/* styles.css */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    background: #060AB2;
+}
+
+.memory-game {
+    width: 640px;
+    height: 640px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    perspective: 1000px; /* Добавлено для 3D эффекта */
+}
+
+.memory-card {
+    width: calc(25% - 10px);
+    height: calc(33.333% - 10px);
+    margin: 5px;
+    position: relative;
+    transform-style: preserve-3d; /* Позволяет дочерним элементам сохранять 3D пространство */
+    transition: transform 0.5s; /* Плавный переход при перевороте */
+}
+
+.front-face,
+.back-face {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border-radius: 5px;
+    backface-visibility: hidden; /* Скрывает заднюю сторону при перевороте */
+}
+
+.front-face {
+    background: #1C7CCC; /* Цвет передней стороны */
+    transform: rotateY(180deg); /* Поворачивает переднюю сторону на 180 градусов */
+}
+
+.back-face {
+    background: #1C7CCC; /* Цвет задней стороны */
+}
+
+.memory-card.flip {
+    transform: rotateY(180deg); /* Переворачивает карточку при добавлении класса flip */
+}
+
+.memory-card:active {
+    transform: scale(0.97); /* Эффект нажатия */
+}
+@media (max-width: 768px) {
+    .memory-card {
+        width: calc(50% - 10px); /* Две карточки в ряд на мобильных устройствах */
+        height: calc(50% - 10px);
+    }
+}
+
+@media (max-width: 480px) {
+    .memory-card {
+        width: calc(100% - 10px); /* Одна карточка в ряд на маленьких экранах */
+        height: calc(50% - 10px); /* Высота также адаптируется */
+    }
+}
